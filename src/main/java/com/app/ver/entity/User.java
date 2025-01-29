@@ -1,5 +1,6 @@
 package com.app.ver.entity;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,10 +9,25 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int id;
+
+    @Column(name = "user_name")
     private String name;
+
+    @Column(name = "user_email")
     private String email;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     @Override
