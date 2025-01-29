@@ -10,13 +10,9 @@ import java.util.Objects;
 @Getter
 @Setter
 public class Car {
-
     private int id;
-
     private String model;
-
     private Brand brand;
-
     private BigDecimal pricePerDay;
 
     @Override

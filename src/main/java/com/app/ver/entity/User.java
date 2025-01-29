@@ -4,14 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
 public class User {
-
     private int id;
     private String name;
     private String email;
+    private Set<Role> roles;
 
     @Override
     public boolean equals(Object o) {
