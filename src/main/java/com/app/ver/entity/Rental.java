@@ -10,7 +10,6 @@ import java.util.Objects;
 @Getter
 @Setter
 public class Rental {
-
     private int id;
     private LocalDate startDate;
     private LocalDate endDate;
