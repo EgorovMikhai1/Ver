@@ -17,3 +17,7 @@ spring:
       schema-locations: classpath:/db/schema.sql
       data-locations: classpath:/db/data.sql
       mode: always
+
+
+server:
+  port: 8081
