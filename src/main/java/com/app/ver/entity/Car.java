@@ -23,6 +23,7 @@ public class Car {
     private String model;
 
     @Column(name = "car_brand")
+    @Enumerated(EnumType.STRING)
     private Brand brand;
 
     @Column(name = "car_price_per_day")
