@@ -10,4 +10,10 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+
+  sql:
+    init:
+      schema-locations: classpath:/db/schema.sql
+      data-locations: classpath:/db/data.sql
+      mode: always

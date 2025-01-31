@@ -74,5 +74,8 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>
+            Ver
+        </finalName>
     </build>
 </project>
