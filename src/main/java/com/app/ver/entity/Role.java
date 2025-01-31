@@ -1,5 +1,6 @@
 package com.app.ver.entity;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,9 +9,22 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "roles")
 public class Role {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id")
     private int id;
+
+    @Column(name = "role_name")
     private String roleName;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "roles_authorities",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id"))
     private Set<Authority> authorities;
 
     @Override
