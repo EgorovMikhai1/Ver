@@ -1,6 +1,8 @@
 package com.app.ver.entity;
 
 import com.app.ver.entity.enums.Brand;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
