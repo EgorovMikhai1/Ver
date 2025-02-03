@@ -1,16 +1,12 @@
 package com.app.ver.entity;
 
 import com.app.ver.entity.enums.Brand;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.*;
-import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Getter
 @Setter
 @Entity
 @Table(name = "cars")
@@ -30,6 +26,18 @@ public class Car {
 
     @Column(name = "car_price_per_day")
     private BigDecimal pricePerDay;
+
+    public String getModel() {
+        return model;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public BigDecimal getPricePerDay() {
+        return pricePerDay;
+    }
 
     @Override
     public boolean equals(Object o) {
