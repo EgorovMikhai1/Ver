@@ -1,4 +1,11 @@
--- Insert test data
+-- Очистка таблиц перед вставкой данных
+DELETE FROM users_roles;
+DELETE FROM roles_authorities;
+DELETE FROM rentals;
+DELETE FROM cars;
+DELETE FROM users;
+DELETE FROM roles;
+DELETE FROM authorities;
 
 -- Insert users
 INSERT INTO users (user_name, user_email)
