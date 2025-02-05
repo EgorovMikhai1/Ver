@@ -13,5 +13,8 @@ spring:
       ddl-auto: update
     show-sql: true
 
-server:
-  port: 8081
+  sql:
+    init:
+      schema-locations: classpath:/db/schema.sql
+      data-locations: classpath:/db/data.sql
+      mode: always

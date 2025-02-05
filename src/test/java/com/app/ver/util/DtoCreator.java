@@ -10,9 +10,10 @@ import java.util.List;
 public class DtoCreator {
 
     public static List<CarDTO> getExpectedCarDtoList() {
-        return Arrays.asList(new CarDTO("X5", "BMW", "100.00"),
-                             new CarDTO("Corsa", "OPEL", "50.00"),
-                             new CarDTO("A4", "AUDI", "80.00"),
-                             new CarDTO("Model 3", "TESLA", "120.00"));
+        return Arrays.asList(new CarDTO("Model S", "TESLA", "TESLA.00"),
+                new CarDTO("Civic", "HONDA", "50.00"),
+                new CarDTO("Camry", "TOYOTA", "65.00"),
+                new CarDTO("Mustang", "FORD", "100.00"),
+                new CarDTO("Golf", "VW", "55.00"));
     }
 }

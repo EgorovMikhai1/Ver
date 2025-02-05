@@ -1,4 +1,3 @@
--- Users table
 CREATE TABLE IF NOT EXISTS users
 (
     user_id    INT AUTO_INCREMENT PRIMARY KEY,
@@ -6,14 +5,12 @@ CREATE TABLE IF NOT EXISTS users
     user_email VARCHAR(255) UNIQUE NOT NULL
 );
 
--- Roles table
 CREATE TABLE IF NOT EXISTS roles
 (
     role_id   INT AUTO_INCREMENT PRIMARY KEY,
     role_name VARCHAR(255) UNIQUE NOT NULL
 );
 
--- Users and roles mapping table (many-to-many relationship)
 CREATE TABLE IF NOT EXISTS users_roles
 (
     user_id INT,
@@ -23,14 +20,12 @@ CREATE TABLE IF NOT EXISTS users_roles
     FOREIGN KEY (role_id) REFERENCES roles (role_id) ON DELETE CASCADE
 );
 
--- Authorities table
 CREATE TABLE IF NOT EXISTS authorities
 (
     authority_id   INT AUTO_INCREMENT PRIMARY KEY,
     authority_name VARCHAR(255) UNIQUE NOT NULL
 );
 
--- Roles and authorities mapping table (many-to-many relationship)
 CREATE TABLE IF NOT EXISTS roles_authorities
 (
     role_id      INT,
@@ -40,7 +35,6 @@ CREATE TABLE IF NOT EXISTS roles_authorities
     FOREIGN KEY (authority_id) REFERENCES authorities (authority_id) ON DELETE CASCADE
 );
 
--- Cars table
 CREATE TABLE IF NOT EXISTS cars
 (
     car_id            INT AUTO_INCREMENT PRIMARY KEY,
@@ -49,7 +43,6 @@ CREATE TABLE IF NOT EXISTS cars
     car_price_per_day DECIMAL(10, 2) NOT NULL
 );
 
--- Rentals table
 CREATE TABLE IF NOT EXISTS rentals
 (
     rental_id         INT AUTO_INCREMENT PRIMARY KEY,

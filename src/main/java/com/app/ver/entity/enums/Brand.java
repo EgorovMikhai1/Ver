@@ -4,5 +4,9 @@ public enum Brand {
     BMW,
     OPEL,
     AUDI,
-    TESLA
+    TESLA,
+    HONDA,
+    TOYOTA,
+    VW,
+    FORD
 }
