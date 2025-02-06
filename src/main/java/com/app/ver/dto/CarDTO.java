@@ -1,6 +1,7 @@
 package com.app.ver.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 import lombok.Setter;
 
 @Setter
@@ -9,15 +10,12 @@ public class CarDTO {
     @JsonProperty("car_model")
     private String model;
 
+    @Getter
     @JsonProperty("car_brand")
     private String brand;
 
     @JsonProperty("car_price_per_day")
     private String pricePerDay;
-
-    public String getBrand() {
-        return brand;
-    }
 
     public CarDTO(String model, String brand, String pricePerDay) {
         this.model = model;

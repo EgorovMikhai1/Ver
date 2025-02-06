@@ -2,6 +2,7 @@ package com.app.ver.entity;
 
 import com.app.ver.entity.enums.Brand;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -17,27 +18,18 @@ public class Car {
     @Column(name = "car_id")
     private int id;
 
+    @Getter
     @Column(name = "car_model")
     private String model;
 
+    @Getter
     @Column(name = "car_brand")
     @Enumerated(EnumType.STRING)
     private Brand brand;
 
+    @Getter
     @Column(name = "car_price_per_day")
     private BigDecimal pricePerDay;
-
-    public String getModel() {
-        return model;
-    }
-
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public BigDecimal getPricePerDay() {
-        return pricePerDay;
-    }
 
     @Override
     public boolean equals(Object o) {
