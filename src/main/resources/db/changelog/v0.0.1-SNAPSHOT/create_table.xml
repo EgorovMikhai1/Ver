@@ -5,6 +5,26 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
 
+    <changeSet id="drop-tables" author="Mikhail Egorov">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">SELECT COUNT(*) FROM information_schema.tables WHERE table_name = 'users_roles'</sqlCheck>
+            <sqlCheck expectedResult="1">SELECT COUNT(*) FROM information_schema.tables WHERE table_name = 'roles_authorities'</sqlCheck>
+            <sqlCheck expectedResult="1">SELECT COUNT(*) FROM information_schema.tables WHERE table_name = 'rentals'</sqlCheck>
+            <sqlCheck expectedResult="1">SELECT COUNT(*) FROM information_schema.tables WHERE table_name = 'users'</sqlCheck>
+            <sqlCheck expectedResult="1">SELECT COUNT(*) FROM information_schema.tables WHERE table_name = 'roles'</sqlCheck>
+            <sqlCheck expectedResult="1">SELECT COUNT(*) FROM information_schema.tables WHERE table_name = 'authorities'</sqlCheck>
+            <sqlCheck expectedResult="1">SELECT COUNT(*) FROM information_schema.tables WHERE table_name = 'cars'</sqlCheck>
+        </preConditions>
+
+        <dropTable tableName="users_roles"/>
+        <dropTable tableName="roles_authorities"/>
+        <dropTable tableName="rentals"/>
+        <dropTable tableName="users"/>
+        <dropTable tableName="roles"/>
+        <dropTable tableName="authorities"/>
+        <dropTable tableName="cars"/>
+    </changeSet>
+
     <changeSet id="1" author="Mikhail Egorov">
         <createTable tableName="users">
             <column name="user_id" type="INT" autoIncrement="true">

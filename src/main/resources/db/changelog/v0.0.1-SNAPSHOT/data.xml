@@ -89,27 +89,27 @@
     <changeSet id="6" author="Mikhail Egorov">
         <insert tableName="cars">
             <column name="car_model" value="Model S"/>
-            <column name="car_brand" value="Tesla"/>
+            <column name="car_brand" value="TESLA"/>
             <column name="car_price_per_day" value="120.00"/>
         </insert>
         <insert tableName="cars">
             <column name="car_model" value="Civic"/>
-            <column name="car_brand" value="Honda"/>
+            <column name="car_brand" value="HONDA"/>
             <column name="car_price_per_day" value="50.00"/>
         </insert>
         <insert tableName="cars">
             <column name="car_model" value="Camry"/>
-            <column name="car_brand" value="Toyota"/>
+            <column name="car_brand" value="TOYOTA"/>
             <column name="car_price_per_day" value="65.00"/>
         </insert>
         <insert tableName="cars">
             <column name="car_model" value="Mustang"/>
-            <column name="car_brand" value="Ford"/>
+            <column name="car_brand" value="FORD"/>
             <column name="car_price_per_day" value="100.00"/>
         </insert>
         <insert tableName="cars">
             <column name="car_model" value="Golf"/>
-            <column name="car_brand" value="Volkswagen"/>
+            <column name="car_brand" value="VW"/>
             <column name="car_price_per_day" value="55.00"/>
         </insert>
     </changeSet>
