@@ -5,6 +5,7 @@ import com.app.ver.repository.CarRepository;
 import com.app.ver.service.CarService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -49,5 +50,6 @@ class CarControllerTestWithException {
         System.out.println("Response: " + responseBody);
 
         Assertions.assertThrows(CarsNotExistInDataBaseException.class, () -> carService.getAllCars());
+        Mockito.verify(carRepository, Mockito.times(2)).findAll();
     }
 }
