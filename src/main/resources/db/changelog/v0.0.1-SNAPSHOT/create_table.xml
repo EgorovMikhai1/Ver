@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1" author="Mikhail Egorov">
+        <createTable tableName="users">
+            <column name="user_id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="Mikhail Egorov">
+        <createTable tableName="roles">
+            <column name="role_id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="role_name" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="Mikhail Egorov">
+        <createTable tableName="authorities">
+            <column name="authority_id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="authority_name" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="Mikhail Egorov">
+        <createTable tableName="users_roles">
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="user_id, role_id" constraintName="pk_users_roles" tableName="users_roles"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="users_roles"
+                                 constraintName="fk_users_roles_user"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="users"
+                                 onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="users_roles"
+                                 constraintName="fk_users_roles_role"
+                                 referencedColumnNames="role_id"
+                                 referencedTableName="roles"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="5" author="Mikhail Egorov">
+        <createTable tableName="roles_authorities">
+            <column name="role_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="role_id, authority_id" constraintName="pk_roles_authorities" tableName="roles_authorities"/>
+
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="roles_authorities"
+                                 constraintName="fk_roles_authorities_role"
+                                 referencedColumnNames="role_id"
+                                 referencedTableName="roles"
+                                 onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint baseColumnNames="authority_id"
+                                 baseTableName="roles_authorities"
+                                 constraintName="fk_roles_authorities_authority"
+                                 referencedColumnNames="authority_id"
+                                 referencedTableName="authorities"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="6" author="Mikhail Egorov">
+        <createTable tableName="cars">
+            <column name="car_id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="car_model" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="car_brand" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="car_price_per_day" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="7" author="Mikhail Egorov">
+        <createTable tableName="rentals">
+            <column name="rental_id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="rental_start_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rental_end_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rental_total_cost" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT"/>
+            <column name="car_id" type="INT"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="rentals"
+                                 constraintName="fk_rentals_user"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="users"
+                                 onDelete="SET NULL"/>
+
+        <addForeignKeyConstraint baseColumnNames="car_id"
+                                 baseTableName="rentals"
+                                 constraintName="fk_rentals_car"
+                                 referencedColumnNames="car_id"
+                                 referencedTableName="cars"
+                                 onDelete="SET NULL"/>
+    </changeSet>
+</databaseChangeLog>
