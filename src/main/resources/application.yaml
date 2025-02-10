@@ -10,11 +10,9 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
 
-  sql:
-    init:
-      schema-locations: classpath:/db/schema.sql
-      data-locations: classpath:/db/data.sql
-      mode: always
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog-master.xml
