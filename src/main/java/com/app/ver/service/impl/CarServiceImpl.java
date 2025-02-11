@@ -2,6 +2,7 @@ package com.app.ver.service.impl;
 
 import com.app.ver.dto.CarDTO;
 import com.app.ver.entity.Car;
+import com.app.ver.entity.enums.Brand;
 import com.app.ver.exception.CarsNotExistInDataBaseException;
 import com.app.ver.exception.errorMessages.ErrorMessage;
 import com.app.ver.mapper.CarMapper;
@@ -24,6 +25,17 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<CarDTO> getAllCars() {
         List<Car> list = carRepository.findAll();
+
+        if (list.isEmpty()) {
+            throw new CarsNotExistInDataBaseException(ErrorMessage.CARS_NOT_EXIST_IN_DATABASE);
+        }
+        return carMapper.toCarDTOList(list);
+    }
+
+    @Override
+    public List<CarDTO> getCarsByBrand(String brand) {
+        Brand brandUppercase = Brand.valueOf(brand.toUpperCase());
+        List<Car> list = carRepository.findByBrand(brandUppercase);
 
         if (list.isEmpty()) {
             throw new CarsNotExistInDataBaseException(ErrorMessage.CARS_NOT_EXIST_IN_DATABASE);

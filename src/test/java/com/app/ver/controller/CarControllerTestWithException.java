@@ -1,5 +1,6 @@
 package com.app.ver.controller;
 
+import com.app.ver.entity.enums.Brand;
 import com.app.ver.exception.CarsNotExistInDataBaseException;
 import com.app.ver.repository.CarRepository;
 import com.app.ver.service.CarService;
@@ -51,5 +52,20 @@ class CarControllerTestWithException {
 
         Assertions.assertThrows(CarsNotExistInDataBaseException.class, () -> carService.getAllCars());
         Mockito.verify(carRepository, Mockito.times(2)).findAll();
+    }
+
+    @Test
+    void getAllCarsByBrandWithExceptionTest() throws Exception {
+        when(carRepository.findByBrand(Brand.VW)).thenReturn(List.of());
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/cars/getByBrand/VW")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        String responseBody = result.getResponse().getContentAsString();
+        System.out.println("Response: " + responseBody);
+
+        Assertions.assertThrows(CarsNotExistInDataBaseException.class, () -> carService.getAllCars());
+        Mockito.verify(carRepository, Mockito.times(1)).findByBrand(Brand.VW);
     }
 }
