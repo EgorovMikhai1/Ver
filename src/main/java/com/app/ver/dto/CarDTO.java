@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
 @Setter
 public class CarDTO {
 
     @JsonProperty("car_model")
     private String model;
 
-    @Getter
     @JsonProperty("car_brand")
     private String brand;
 
