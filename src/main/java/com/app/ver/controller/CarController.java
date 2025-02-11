@@ -1,7 +1,6 @@
 package com.app.ver.controller;
 
 import com.app.ver.dto.CarDTO;
-import com.app.ver.entity.enums.Brand;
 import com.app.ver.service.CarService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +25,11 @@ public class CarController {
     @GetMapping("/getByBrand/{brand}")
     public List<CarDTO> getCarsByBrand(@PathVariable String brand) {
         return carService.getCarsByBrand(brand);
+    }
+
+    @GetMapping("/getByModel/{model}")
+    public List<CarDTO> getCarsByModel(@PathVariable String model) {
+        return carService.getCarsByModel(model);
     }
 
     @ExceptionHandler(Exception.class)
