@@ -9,14 +9,17 @@
         <insert tableName="users">
             <column name="user_name" value="Alice Johnson"/>
             <column name="user_email" value="alice@example.com"/>
+            <column name="user_password" value="$2y$10$hw2a9O0OLXbmbhg9HzEibe5VuZb3eGBRMTSnXjd90I.qR9rCBfm12"/>
         </insert>
         <insert tableName="users">
             <column name="user_name" value="Bob Smith"/>
             <column name="user_email" value="bob@example.com"/>
+            <column name="user_password" value="$2y$10$a5bK24MbWEMXQzp2FgYvWu4Bh55wE5yQry4cC9zvTsULQXE3tEsh."/>
         </insert>
         <insert tableName="users">
             <column name="user_name" value="Charlie Davis"/>
             <column name="user_email" value="charlie@example.com"/>
+            <column name="user_password" value="$2y$10$ldCgGVKFkXjLaeBeCtvVuuQRseU4B9/7736CAo.RcN1fkiI7X/biq"/>
         </insert>
     </changeSet>
 
