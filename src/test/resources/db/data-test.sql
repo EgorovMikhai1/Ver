@@ -8,15 +8,15 @@ DELETE FROM users_roles;
 DELETE FROM roles;
 DELETE FROM users;
 
-INSERT INTO users (user_name, user_email)
-VALUES ('Alice Johnson', 'alice@example.com'),
-       ('Bob Smith', 'bob@example.com'),
-       ('Charlie Davis', 'charlie@example.com');
+INSERT INTO users (user_name, user_email, user_password)
+VALUES ('Alice Johnson', 'alice@example.com', '$2b$12$0Ms.Buv4JlQsaWOB3K.qe.1fWfM7.TBHVRTsgQR2Ug8uL31HR6qFa'),
+       ('Bob Smith', 'bob@example.com', '$2b$12$0Ms.Buv4JlQsaWOB3K.qe.1fWfM7.TBHVRTsgQR2Ug8uL31HR6qFa'),
+       ('Charlie Davis', 'charlie@example.com', '$2b$12$0Ms.Buv4JlQsaWOB3K.qe.1fWfM7.TBHVRTsgQR2Ug8uL31HR6qFa');
 
 INSERT INTO roles (role_name)
-VALUES ('ADMIN'),
-       ('USER'),
-       ('MANAGER');
+VALUES ('ROLE_ADMIN'),
+       ('ROLE_USER'),
+       ('ROLE_MANAGER');
 
 INSERT INTO users_roles (user_id, role_id)
 VALUES (1, 1),

@@ -9,26 +9,29 @@
         <insert tableName="users">
             <column name="user_name" value="Alice Johnson"/>
             <column name="user_email" value="alice@example.com"/>
+            <column name="user_password" value="$2b$12$0Ms.Buv4JlQsaWOB3K.qe.1fWfM7.TBHVRTsgQR2Ug8uL31HR6qFa"/>
         </insert>
         <insert tableName="users">
             <column name="user_name" value="Bob Smith"/>
             <column name="user_email" value="bob@example.com"/>
+            <column name="user_password" value="$2b$12$0Ms.Buv4JlQsaWOB3K.qe.1fWfM7.TBHVRTsgQR2Ug8uL31HR6qFa"/>
         </insert>
         <insert tableName="users">
             <column name="user_name" value="Charlie Davis"/>
             <column name="user_email" value="charlie@example.com"/>
+            <column name="user_password" value="$2b$12$0Ms.Buv4JlQsaWOB3K.qe.1fWfM7.TBHVRTsgQR2Ug8uL31HR6qFa"/>
         </insert>
     </changeSet>
 
     <changeSet id="2" author="Mikhail Egorov">
         <insert tableName="roles">
-            <column name="role_name" value="ADMIN"/>
+            <column name="role_name" value="ROLE_ADMIN"/>
         </insert>
         <insert tableName="roles">
-            <column name="role_name" value="USER"/>
+            <column name="role_name" value="ROLE_USER"/>
         </insert>
         <insert tableName="roles">
-            <column name="role_name" value="MANAGER"/>
+            <column name="role_name" value="ROLE_MANAGER"/>
         </insert>
     </changeSet>
 
