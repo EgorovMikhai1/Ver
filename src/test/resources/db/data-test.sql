@@ -9,14 +9,14 @@ DELETE FROM roles;
 DELETE FROM users;
 
 INSERT INTO users (user_name, user_email, user_password)
-VALUES ('Alice Johnson', 'alice@example.com', '$2y$10$hw2a9O0OLXbmbhg9HzEibe5VuZb3eGBRMTSnXjd90I.qR9rCBfm12'),
-       ('Bob Smith', 'bob@example.com', '$2y$10$a5bK24MbWEMXQzp2FgYvWu4Bh55wE5yQry4cC9zvTsULQXE3tEsh.'),
-       ('Charlie Davis', 'charlie@example.com', '$2y$10$ldCgGVKFkXjLaeBeCtvVuuQRseU4B9/7736CAo.RcN1fkiI7X/biq');
+VALUES ('Alice Johnson', 'alice@example.com', '$2b$12$0Ms.Buv4JlQsaWOB3K.qe.1fWfM7.TBHVRTsgQR2Ug8uL31HR6qFa'),
+       ('Bob Smith', 'bob@example.com', '$2b$12$0Ms.Buv4JlQsaWOB3K.qe.1fWfM7.TBHVRTsgQR2Ug8uL31HR6qFa'),
+       ('Charlie Davis', 'charlie@example.com', '$2b$12$0Ms.Buv4JlQsaWOB3K.qe.1fWfM7.TBHVRTsgQR2Ug8uL31HR6qFa');
 
 INSERT INTO roles (role_name)
-VALUES ('ADMIN'),
-       ('USER'),
-       ('MANAGER');
+VALUES ('ROLE_ADMIN'),
+       ('ROLE_USER'),
+       ('ROLE_MANAGER');
 
 INSERT INTO users_roles (user_id, role_id)
 VALUES (1, 1),

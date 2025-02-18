@@ -1,46 +1,47 @@
 package com.app.ver.config;
 
+import com.app.ver.security.UserDetailsServiceImpl;
+import com.app.ver.security.jwt.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-
-import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final UserDetailsServiceImpl userDetailsService;
+    private final JwtFilter jwtfilter;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(Customizer.withDefaults())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
-
+        http.csrf(AbstractHttpConfigurer::disable)
+                .logout(logout -> logout.deleteCookies("JSESSIONID"))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/cars/getByBrand/**").hasRole("USER")
-                        .requestMatchers("/cars/getByModel/**").hasRole("ADMIN")
-                        .requestMatchers("/cars/getAll").permitAll()
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/cars/getByBrand/{brand}").hasAnyAuthority("ROLE_USER", "READ_PRIVILEGES")
+                        .requestMatchers(HttpMethod.GET, "/cars/getByModel/{model}").hasAnyAuthority("ROLE_ADMIN", "WRITE_PRIVILEGES")
+                        .requestMatchers(HttpMethod.GET, "/cars/getAll").permitAll()
                         .anyRequest().authenticated())
-
-                .formLogin(withDefaults())
-                .httpBasic(withDefaults())
-                .build();
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtfilter, UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable);
+        return http.build();
     }
 
     @Bean
@@ -49,33 +50,15 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider provider() {
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService());
+        provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        String encodedAdminPassword = "$2a$10$kacdvfcepw3hOwdSkF5Hp.jLUVHgaFY3OsX4IM5KWyFUk.JTpInzy"; // "admin"
-        String encodedUserPassword = "$2a$10$CvpFgC6Lka0MuUs8XCdmpustf/x7iumq8428VGVzdKGN7KvySy16O"; // "user"
-
-        UserDetails user = User.builder()
-                .username("user")
-                .password(encodedUserPassword)
-                .roles("USER")
-                .build();
-
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(encodedAdminPassword)
-                .roles("ADMIN")
-                .build();
-
-        System.out.println("User roles: " + user.getAuthorities());
-        System.out.println("Admin roles: " + admin.getAuthorities());
-
-        return new InMemoryUserDetailsManager(user, admin);
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }
