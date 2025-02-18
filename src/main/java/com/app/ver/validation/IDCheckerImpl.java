@@ -16,7 +16,7 @@ public class IDCheckerImpl implements ConstraintValidator<IDChecker, String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         return Optional.ofNullable(value)
-                .filter(id -> id.isBlank())
+                .filter(String::isBlank)
                 .map(id -> id.matches(idPattern))
                 .orElse(false);
     }

@@ -30,7 +30,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         Set<String> grantedAuthorities = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
         Set<String> userRoles = user.getRoles().stream()
-                .map(Role::getRoleName)  // Преобразуем Role в String
+                .map(Role::getRoleName)
                 .collect(Collectors.toSet());
 
         if (userRoles.stream().anyMatch(grantedAuthorities::contains)) {
@@ -39,7 +39,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
             sessionCookie.setHttpOnly(true);
             sessionCookie.setPath("/");
             response.addCookie(sessionCookie);
-            response.sendRedirect("/dashboard");
         }
     }
 }
