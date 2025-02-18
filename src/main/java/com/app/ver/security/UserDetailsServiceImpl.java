@@ -39,6 +39,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .username(currentUser.getEmail())
                 .password(currentUser.getPassword())
                 .authorities(getAuthorities(currentUser.getRoles()))
+                .accountLocked(!currentUser.isAccountNonLocked())
+                .accountExpired(!currentUser.isAccountNonExpired())
+                .credentialsExpired(!currentUser.isCredentialsNonExpired())
+                .disabled(!currentUser.isEnabled())
                 .build();
     }
 
@@ -53,8 +57,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             for(Authority authority : authoritySet) {
                 authorities.add(new SimpleGrantedAuthority(authority.getAuthorityName()));
             }
-            role.getAuthorities().forEach(authority ->
-                    authorities.add(new SimpleGrantedAuthority(authority.getAuthorityName())));
         }
         return authorities;
     }

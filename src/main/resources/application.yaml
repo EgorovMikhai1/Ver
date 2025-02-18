@@ -20,3 +20,7 @@ spring:
 logging:
   level:
     root: info
+
+variables:
+  jwtSecret: 9ygR+2hv51AFdykOG3lE0W1pmyq1xC/4wV74L0hRRwXyqPruX8w0m/oXFPlR+RM+S3AogFdU88RAn/MeAmJhQw==
+  jwtExpirationMs: 864000000
