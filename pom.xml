@@ -50,7 +50,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- База данных -->
+        <!-- Database -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
@@ -68,7 +68,7 @@
             <version>4.31.0</version>
         </dependency>
 
-        <!-- Тестирование -->
+        <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -80,7 +80,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Валидация -->
+        <!-- Validation -->
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
@@ -116,7 +116,7 @@
 
     <build>
         <plugins>
-            <!-- Maven Compiler Plugin -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -139,7 +139,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -190,6 +189,7 @@
                     <source>${java.version}</source>
                 </configuration>
             </plugin>
+
         </plugins>
         <finalName>Ver</finalName>
     </build>
