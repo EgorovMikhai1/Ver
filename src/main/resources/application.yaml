@@ -3,9 +3,9 @@ spring:
     banner-mode: off
 
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASS}
+    url: jdbc:mysql://${MYSQL_ROOT_HOST:localhost}:${MYSQL_PORT:3306}//${MYSQL_DB_NAME:ver}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASS:123123}
 
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
